@@ -142,12 +142,22 @@ section{padding:80px 0}
 .fv-visual-frame img{width:100%;height:100%;object-fit:cover;object-position:top center}
 .fv-visual-badge{
   position:absolute;bottom:-16px;left:-16px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
   background:var(--white);border:1px solid var(--cream-dark);
-  border-radius:16px;padding:14px 18px;
-  box-shadow:0 8px 32px rgba(26,16,8,0.08);min-width:140px;
+  border-radius:16px;padding:14px 20px;
+  box-shadow:0 8px 32px rgba(26,16,8,0.08);min-width:150px;
 }
-.fv-badge-num{font-family:var(--ff-display);font-size:32px;font-weight:700;color:var(--rose);line-height:1}
-.fv-badge-label{font-size:11px;color:var(--ink-light);margin-top:4px;font-weight:500}
+.fv-badge-main{display:flex;flex-direction:column;align-items:center}
+.fv-badge-caption{font-size:11px;font-weight:700;color:var(--ink-light);letter-spacing:0.08em;line-height:1.4;white-space:nowrap}
+.fv-badge-num{
+  font-family:var(--ff-ja);font-size:36px;font-weight:700;color:var(--rose);
+  line-height:1.1;letter-spacing:0.02em;font-variant-numeric:lining-nums;white-space:nowrap;
+}
+.fv-badge-num .unit{font-size:17px;margin-left:2px}
+.fv-badge-sub{
+  font-size:12px;font-weight:600;color:var(--ink-mid);white-space:nowrap;
+  margin-top:8px;padding-top:8px;border-top:1px solid var(--cream-dark);width:100%;
+}
 
 /* ===== BUTTONS ===== */
 .btn-primary{
@@ -554,17 +564,18 @@ footer span{color:rgba(255,255,255,0.2);margin:0 8px}
   background:var(--white);overflow:hidden;margin-bottom:32px;
 }
 .sci-item{
-  display:grid;grid-template-columns:minmax(0,180px) 1fr;gap:24px;
+  display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr);gap:24px;
   padding:28px 32px;border-bottom:1px solid var(--cream-dark);
 }
+.sci-item>*{min-width:0}
 .sci-item:last-child{border-bottom:none}
 .sci-label{
-  font-family:var(--ff-ja);font-size:15px;font-weight:600;color:var(--rose);
-  line-height:1.6;word-break:keep-all;
+  font-family:var(--ff-ja);font-size:14px;font-weight:600;color:var(--rose);
+  line-height:1.6;word-break:keep-all;overflow-wrap:break-word;
 }
 .sci-text{
-  font-size:14px;color:var(--ink-mid);line-height:1.9;
-  word-break:keep-all;overflow-wrap:break-word;
+  font-size:13px;color:var(--ink-mid);line-height:1.9;
+  word-break:normal;overflow-wrap:break-word;
 }
 .sci-bridge{
   text-align:center;font-family:var(--ff-ja);
@@ -621,20 +632,26 @@ footer span{color:rgba(255,255,255,0.2);margin:0 8px}
 @media(max-width:720px){
   .fv-visual{flex-direction:column;align-items:center}
   .fv-visual-badge{
-    display:inline-flex;align-items:center;gap:12px;
+    display:inline-flex;flex-direction:row;align-items:center;gap:14px;
     position:static;margin:18px auto 0;
-    padding:10px 20px;border-radius:100px;min-width:0;
+    padding:10px 22px;border-radius:100px;min-width:0;
     box-shadow:0 4px 18px rgba(26,16,8,0.07);
   }
-  .fv-badge-num{font-size:24px}
-  .fv-badge-label{margin-top:0;font-size:11px;text-align:left;line-height:1.5}
+  .fv-badge-caption{font-size:10px}
+  .fv-badge-num{font-size:28px}
+  .fv-badge-num .unit{font-size:14px}
+  .fv-badge-sub{
+    margin:0;padding:0 0 0 14px;width:auto;
+    border-top:none;border-left:1px solid var(--cream-dark);
+    font-size:12px;line-height:1.4;
+  }
 }
 
 @media(max-width:480px){
   .why-intro{margin-bottom:36px}
-  .sci-item{grid-template-columns:1fr;gap:8px;padding:22px 18px}
-  .sci-label{font-size:14px}
-  .sci-text{font-size:13px}
+  .sci-item{grid-template-columns:minmax(0,1fr);gap:8px;padding:22px 18px}
+  .sci-label{font-size:13px}
+  .sci-text{font-size:12px;line-height:1.85}
   .sci-band{border-radius:16px}
   .medical-note{padding:16px 18px;font-size:11px}
 }
@@ -680,8 +697,11 @@ footer span{color:rgba(255,255,255,0.2);margin:0 8px}
         <img src="profile.webp" alt="腸活アドバイザーけいこ" width="300" height="400" fetchpriority="high">
       </div>
       <div class="fv-visual-badge">
-        <div class="fv-badge-num">10</div>
-        <div class="fv-badge-label">年の教員経験<br>3児の母</div>
+        <div class="fv-badge-main">
+          <span class="fv-badge-caption">小学校教員歴</span>
+          <span class="fv-badge-num">10<span class="unit">年</span></span>
+        </div>
+        <div class="fv-badge-sub">3児の母</div>
       </div>
     </div>
   </div>
